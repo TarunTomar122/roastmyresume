@@ -135,14 +135,16 @@ export async function POST(req: NextRequest) {
   try {
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+      process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
-    const clientId = (formData.get("clientId") as string | null) ?? null;
-    if (clientId) {
-      await supabase.from("roasts").delete().eq("client_id", clientId);
-    }
+    const candidateName = (roastData.candidateName as string) ?? "Friend";
+
+    // Delete any existing row for this person before inserting fresh
+    // (service role key bypasses RLS so this always works)
+    await supabase.from("roasts").delete().eq("candidate_name", candidateName);
+
     await supabase.from("roasts").insert({
-      candidate_name: roastData.candidateName ?? "Friend",
+      candidate_name: candidateName,
       cooked_score: roastData.cookedScore,
       industry: roastData.industry,
       industry_rank: roastData.industryRank,
@@ -150,7 +152,6 @@ export async function POST(req: NextRequest) {
       roast_quote: roastData.roastQuote,
       score_breakdown: roastData.scoreBreakdown,
       whats_holding_back: roastData.whatsHoldingBack,
-      client_id: clientId,
     });
   } catch (e) {
     console.error("Supabase insert failed:", e);

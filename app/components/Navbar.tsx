@@ -12,8 +12,8 @@ export default function Navbar() {
       className="sticky top-0 z-50"
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <Image src="/logo.png" alt="Roast My Resume" width={36} height={36} style={{ objectFit: "contain" }} />
+        <Link href="/" className="flex items-center gap-2 font-bold" style={{ whiteSpace: "nowrap", fontSize: "clamp(11px, 3.5vw, 18px)" }}>
+          <Image src="/logo.png" alt="Roast My Resume" width={28} height={28} style={{ objectFit: "contain", flexShrink: 0 }} />
           <span style={{ color: "#1a1a1a" }}>
             ROAST <span style={{ color: "#FF6B3D" }}>MY RESUME</span>
           </span>
@@ -35,8 +35,9 @@ export default function Navbar() {
           </a>
         </div>
 
-        <Link href="/upload" className="btn-primary text-sm">
-          Roast My Resume →
+        <Link href="/upload" className="btn-primary text-sm" style={{ whiteSpace: "nowrap" }}>
+          <span className="hidden sm:inline">Roast My Resume →</span>
+          <span className="sm:hidden">Roast →</span>
         </Link>
       </div>
     </nav>

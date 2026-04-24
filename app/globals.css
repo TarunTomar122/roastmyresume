@@ -27,6 +27,12 @@ body {
   color: var(--foreground);
   font-family: -apple-system, 'Inter', 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
+  line-height: 2;
+}
+
+p {
+  line-height: 2.1;
+  margin-bottom: 0.75em;
 }
 
 * {
@@ -132,5 +138,20 @@ body {
 @media (max-width: 480px) {
   .score-breakdown-grid {
     grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    line-height: 2.1;
+  }
+
+  p {
+    line-height: 2.2;
+    margin-bottom: 0.75em;
+  }
+
+  h1, h2, h3 {
+    line-height: 1.25;
   }
 }
