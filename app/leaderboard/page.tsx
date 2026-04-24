@@ -113,7 +113,7 @@ export default function LeaderboardPage() {
   }, [activeTime, lastResult?.cookedScore]);
 
   const filtered = filterByTab(allRows, activeTab);
-  const mostCooked = [...filtered].sort((a, b) => b.cooked_score - a.cooked_score).slice(0, 10);
+  const mostCooked = [...filtered].filter((r) => r.cooked_score >= 50).sort((a, b) => b.cooked_score - a.cooked_score).slice(0, 10);
   const leastCooked = [...filtered].filter((r) => r.cooked_score < 50).sort((a, b) => a.cooked_score - b.cooked_score).slice(0, 10);
   const avgScore = filtered.length ? Math.round(filtered.reduce((s, r) => s + r.cooked_score, 0) / filtered.length) : 0;
 
